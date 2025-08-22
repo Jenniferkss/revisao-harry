@@ -25,7 +25,19 @@ if(bruxo){
     })
 }
 });
+app.get("/bruxos/nome/:nome",(req,res) =>{
+let nome = req.params.nome;
+nome = nome.toLowerCase();
+const nomesFiltrados = bruxos.filter(b => b.nome.toLowerCase().includes(nome));
 
+if(nomesFiltrados){
+    res.status(200).json(nomesFiltrados);
+} else {
+    res.status(404).json({
+        mensagem: "Bruxo(a) não encontrado"
+    })
+}
+});
 app.listen(serverPort,()=> {
     console.log("Servidor esta rodando...");
     

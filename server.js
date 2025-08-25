@@ -13,7 +13,7 @@ app.get("/bruxos",(req,res)=> {
 res.json(bruxos);
 });
 
-app.get("/bruxos/:id",(req,res) =>{
+app.get("/dados/bruxos/:id",(req,res) =>{
 const id = parseInt(req.params.id);
 const bruxo = bruxos.find(b => b.id === id);
 
@@ -49,6 +49,7 @@ app.get("/bruxos",(req,res) => {
 });
 
 app.get ("/casas", (req,res)=> {
+    
     if (casas.length > 0 ) {
         res.status(200).json(casas); 
     } else {
@@ -57,15 +58,60 @@ app.get ("/casas", (req,res)=> {
         })
     }
 });
+app.get("/dados/casas/:id",(req,res) =>{
+const id = parseInt(req.params.id);
+const casa = casas.find(c => c.id === id);
+if(casa){
+    res.status(200).json(casa);
+} else {
+    res.status(404).json({
+        mensagem: "Casa não encontrada"
+    })
+}
+});
 
 app.get("/varinhas",(req,res)=> {
     res.status(200).json(varinhas);
 });
+app.get("/dados/varinhas/:id",(req,res) =>{
+const id = parseInt(req.params.id);
+const varinha = varinhas.find(v => v.id === id);
+if(varinha){
+    res.status(200).json(varinha);
+} else {
+    res.status(404).json({
+        mensagem: "Varinha não encontrada"
+    })
+}
+});
+
 app.get("/animais",(req,res)=> {
     res.status(200).json(animais);
 });
+app.get("/dados/animais/:id",(req,res) =>{
+const id = parseInt(req.params.id);
+const animal = animais.find(a => a.id === id);
+if(animal){
+    res.status(200).json(animal);
+} else {
+    res.status(404).json({
+        mensagem: "Animal não encontrado"
+    })
+}
+});
 app.get("/pocoes",(req,res)=> {
     res.status(200).json(pocoes);
+});
+app.get("/dados/pocoes/:id",(req,res) =>{
+const id = parseInt(req.params.id);
+const pocao = pocoes.find(p => p.id === id);
+if(pocao){
+    res.status(200).json(pocao);
+} else {
+    res.status(404).json({
+        mensagem: "Poção não encontrada"
+    })
+}
 });
 app.listen(serverPort,()=> {
     console.log(`Servidor esta rodando em http://localhost:${serverPort}`);
